@@ -3,7 +3,6 @@ import {v4 as uuid} from 'uuid';
 
 async function get() {
     const users = await knex('users');
-    console.log(users);
     return users;
 }
 
@@ -22,23 +21,22 @@ async function insert(UserParams) {
     }
 }
 
-async function put(putParams) {
-    const { user_id, user_phone, user_name, user_bio } = putParams;
+async function put(putParams, putId) {
+    const { user_phone, user_name, user_bio } = putParams;
     await knex('users')
     .update({
         user_phone: user_phone,
         user_name: user_name,
         user_bio: user_bio
     })
-    .where({ user_phone: user_phone });
+    .where({ user_id: putId.user_id });
+    console.log(putId);
 }
 
-async function del(delParams) {
-    const { user_phone } = delParams;
-
+async function del(delId) {
     await knex('users')
     .del()
-    .where({ user_phone: user_phone });
+    .where({ user_id: delId.user_id });
 }
 
 export { get, insert, put, del }; 

@@ -5,6 +5,7 @@ const routes = express.Router();
 
 routes.get('/users', getUsers);
 routes.post('/users', insertUser);
-routes.put('/users', putUser);
-routes.delete('/users', delUser);
+routes.put('/users/:user_id', putUser);
+routes.delete('/users/:user_id', delUser);
+
 export default routes;

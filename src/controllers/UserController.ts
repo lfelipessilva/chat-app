@@ -1,4 +1,3 @@
-import knex from '../database';
 import { Request, Response } from 'express';
 
 import { get, insert, put, del } from '../services/UserService';
@@ -13,11 +12,11 @@ function insertUser(req: Request, res: Response) {
 }
 
 function putUser(req: Request, res: Response) {
-    put(req.body);
+    put(req.body, req.params);
 }
 
 function delUser(req: Request, res: Response) {
-    del(req.body);
+    del(req.params);
 }
 
 export { getUsers, insertUser, putUser, delUser };
