@@ -1,15 +1,23 @@
 import knex from '../database';
 import { Request, Response } from 'express';
 
-import { get, insert } from '../services/UserService';
+import { get, insert, put, del } from '../services/UserService';
 
 async function getUsers(req: Request, res: Response) {
-    const users = get();
+    const users = await get();
     return res.json(users);
 }
 
-async function insertUser(req: Request, res: Response) {
+function insertUser(req: Request, res: Response) {
     insert(req.body);
-    return res.status(201);
 }
-export { getUsers, insertUser };
+
+function putUser(req: Request, res: Response) {
+    put(req.body);
+}
+
+function delUser(req: Request, res: Response) {
+    del(req.body);
+}
+
+export { getUsers, insertUser, putUser, delUser };
