@@ -6,6 +6,7 @@ import { Server, Socket } from 'socket.io';
 import routes from './routes';
 
 const app = express();
+app.use(express.json());
 app.use(routes);
 
 const http = createServer(app);
