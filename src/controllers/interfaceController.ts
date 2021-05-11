@@ -1,0 +1,5 @@
+function indexInterface() {
+    
+}
+
+export { indexInterface };

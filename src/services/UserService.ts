@@ -10,12 +10,12 @@ async function insert(UserParams) {
     const { user_phone, user_name, user_bio } = UserParams;
 
     try{
-    await knex('users').insert({
-        user_id: uuid(),
-        user_phone,
-        user_name,
-        user_bio
-    });
+        await knex('users').insert({
+            user_id: uuid(),
+            user_phone,
+            user_name,
+            user_bio
+        });
     } catch(error) {
         return error;
     }
