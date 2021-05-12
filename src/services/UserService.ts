@@ -39,4 +39,11 @@ async function del(delId) {
     .where({ user_id: delId.user_id });
 }
 
-export { get, insert, put, del }; 
+async function getUserByPhone(user_phone) {
+    const userData = knex('users')
+    .where({ user_phone: user_phone });
+
+    return userData;
+}
+
+export { get, insert, put, del, getUserByPhone }; 

@@ -1,7 +1,10 @@
 import express from 'express';
-import { getUsers, insertUser, putUser, delUser } from './controllers/UserController';
+
+import { showInterface } from './controllers/InterfaceController';
+import { showLogin, login } from './controllers/LoginController';
+import { getUsers, insertUser, putUser, delUser} from './controllers/UserController';
 import { insertConnection, getConnection } from './controllers/ConnectionController';
-import { indexInterface } from './controllers/interfaceController';
+
 
 const routes = express.Router();
 
@@ -13,7 +16,9 @@ routes.delete('/users/:user_id', delUser);
 routes.post('/connections', insertConnection);
 routes.get('/connections', getConnection);
 
-routes.get('/', indexInterface);
+routes.get('/login', showLogin);
+routes.post('/login', login);
 
+routes.get('/', showInterface);
 
 export default routes;
