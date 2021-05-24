@@ -1,49 +1,47 @@
 import knex from '../database';
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 
-async function get() {
-    const users = await knex('users');
-    return users;
-}
+async function createUser(email: string, name: string) {
 
-async function insert(UserParams) {
-    const { user_phone, user_name, user_bio } = UserParams;
+    const user = {
+        user_id: uuid(), 
+        user_email: email, 
+        user_name: name,
+        created_at: Date.now()
+    };
 
-    try{
-        await knex('users').insert({
-            user_id: uuid(),
-            user_phone,
-            user_name,
-            user_bio
-        });
-    } catch(error) {
+    try {
+        await knex('users')
+            .insert({ user_id: user.user_id, 
+                user_email: user.user_email, 
+                user_name: user.user_name,
+                created_at: user.created_at});
+        
+    } catch (error) {
         return error;
     }
+
+
+    return user;
 }
 
-async function put(putParams, putId) {
-    const { user_phone, user_name, user_bio } = putParams;
-    await knex('users')
-    .update({
-        user_phone: user_phone,
-        user_name: user_name,
-        user_bio: user_bio
-    })
-    .where({ user_id: putId.user_id });
-    console.log(putId);
+
+
+async function findUserByEmail(email: string) {
+    const user = await knex('users')
+        .where('email', email)
+        .first();
+
+    const objectUser = {
+        user_id: user.user_id,
+        user_email: user.user_email,
+        user_name: user.user_name
+    };
+
+    if(!objectUser.user_id){
+        return undefined;
+    }
+    
+    return objectUser;
 }
-
-async function del(delId) {
-    await knex('users')
-    .del()
-    .where({ user_id: delId.user_id });
-}
-
-async function getUserByPhone(user_phone) {
-    const userData = knex('users')
-    .where({ user_phone: user_phone });
-
-    return userData;
-}
-
-export { get, insert, put, del, getUserByPhone }; 
+export { createUser, findUserByEmail };
