@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../public/css/styles.css">
+    <title>Client Chat</title>
+</head>
+
+<body>
+    <input type="text" name="client_email" placeholder="Digite seu email..." />
+    <input type="text" name="client_message" placeholder="Digite sua mensagem aqui..." />
+    <input type="button" value="Iniciar Chat" id="start_chat_button" />
+
+    <div id="container">
+        <input type="text" name="client_message" placeholder="Digite sua mensagem aqui..." />
+    </div>
+</body>
+
+<script>
+    document.getElementById('start_chat_button').addEventListener("click", () => {
+        document.getElementById('container').style.display = 'none';
+    })
+</script>
+<script src="/js/client.js"></script>
+
+</html>

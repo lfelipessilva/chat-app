@@ -18,7 +18,6 @@ async function createUser(email: string, name: string) {
                 user_name: user.user_name,
                 created_at: user.created_at
             });
-        
     } catch (error) {
         return error;
     }

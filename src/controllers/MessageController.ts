@@ -17,4 +17,9 @@ async function sendMessage(req: Request, res: Response) {
 
     res.json(message);
 }
-export { sendMessage };
+
+async function adminSendMessage(req: Request, res: Response) {
+
+}
+
+export { sendMessage, adminSendMessage };

@@ -1,8 +1,12 @@
 import { Request, Response } from 'express';
 
-async function showInterface(req: Request, res: Response) {
-    return res.render('index');
+async function clientInterface(req: Request, res: Response) {
+    return res.render('client');
+}
+
+async function adminInterface(req: Request, res: Response) {
+    return res.render('client');
 }
 
 
-export { showInterface };
+export { clientInterface, adminInterface };
