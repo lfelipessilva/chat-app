@@ -3,7 +3,6 @@ const socket = io();
 const text = document.getElementById('client_message');
 const email = document.getElementById('client_email');
 
-
 socket.on('connect', () => {
     const params = {
         text: text,
