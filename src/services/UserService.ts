@@ -12,36 +12,28 @@ async function createUser(email: string, name: string) {
 
     try {
         await knex('users')
-            .insert({ user_id: user.user_id, 
+            .insert({ 
+                user_id: user.user_id, 
                 user_email: user.user_email, 
                 user_name: user.user_name,
-                created_at: user.created_at});
+                created_at: user.created_at
+            });
         
     } catch (error) {
         return error;
     }
-
-
-    return user;
+    
+    return user.user_id;
 }
 
-
-
 async function findUserByEmail(email: string) {
-    const user = await knex('users')
-        .where('email', email)
-        .first();
-
-    const objectUser = {
-        user_id: user.user_id,
-        user_email: user.user_email,
-        user_name: user.user_name
-    };
-
-    if(!objectUser.user_id){
+    const user: any = await knex('users')
+        .where('user_email', email);
+    
+    if(!user[0]){
         return undefined;
     }
     
-    return objectUser;
+    return user[0].user_id;
 }
 export { createUser, findUserByEmail };

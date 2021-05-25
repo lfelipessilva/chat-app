@@ -2,7 +2,6 @@ import express from 'express';
 
 import { sendMessage } from './controllers/MessageController';
 
-
 const routes = express.Router();
 
 routes.get('/message');
