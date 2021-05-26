@@ -19,13 +19,20 @@
     </div>
 
     <div id="container">
-        <input type="text" name="client_message" placeholder="Digite sua mensagem aqui..." />
+        <div id="messages">
+            asdfasdf
+        </div>
+        <div id="message-inputs">
+            <textarea name="client_message" placeholder="Digite sua mensagem aqui..." cols="28" rows="1"></textarea>
+            <input type="button" value="Enviar" id="chat_button" />
+        </div>
     </div>
 </body>
 
 <script>
     document.getElementById('start_chat_button').addEventListener("click", () => {
-        document.getElementById('container').style.display = 'block';
+        document.getElementById('credentials-input').style.display = 'none';
+        document.getElementById('container').style.display = 'flex';
     })
 </script>
 <script src="/js/client.js"></script>
