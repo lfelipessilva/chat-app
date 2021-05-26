@@ -5,6 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('connections', function(table) {
         table.uuid('connection_id').primary();
         table.uuid('user_id').unsigned();
+        table.string('socket_id');
         table.string('admin_id').nullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
 

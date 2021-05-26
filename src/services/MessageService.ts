@@ -1,7 +1,7 @@
 import knex from '../database';
 import { v4 as uuid } from 'uuid';
 
-async function createMessage(text: string, user_id: string, admin_id ?: string) {
+async function createMessage(user_id: string, text: string, admin_id ?: string) {
     const message = {
         message_id : uuid(),
         user_id : user_id,
@@ -26,5 +26,10 @@ async function createMessage(text: string, user_id: string, admin_id ?: string) 
     return message;
 }
 
+async function findMessagesByUserId(user_id) {
+    const messages = await knex('messages')
+        .where({ user_id: user_id});
 
-export { createMessage };
+    return messages;
+}
+export { createMessage, findMessagesByUserId };

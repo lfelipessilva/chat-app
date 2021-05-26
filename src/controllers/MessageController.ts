@@ -4,13 +4,13 @@ import { createUser, findUserByEmail } from '../services/UserService';
 import { createMessage } from '../services/MessageService';
 
 async function sendMessage(req: Request, res: Response) {
-    const { name, email, text } = req.body;
+    const { email, text } = req.body;
 
     //check if email has already sent any messages
     let user = await findUserByEmail(email);
 
     if(user == undefined){
-        user = await createUser(email, name); 
+        user = await createUser(email); 
     }
 
     const message = await createMessage(text, user);

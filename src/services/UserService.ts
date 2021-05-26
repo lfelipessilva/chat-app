@@ -1,12 +1,11 @@
 import knex from '../database';
 import { v4 as uuid } from 'uuid';
 
-async function createUser(email: string, name: string) {
+async function createUser(email: string) {
 
     const user = {
         user_id: uuid(), 
         user_email: email, 
-        user_name: name,
         created_at: Date.now()
     };
 
@@ -15,14 +14,14 @@ async function createUser(email: string, name: string) {
             .insert({ 
                 user_id: user.user_id, 
                 user_email: user.user_email, 
-                user_name: user.user_name,
+                user_name: null,
                 created_at: user.created_at
             });
     } catch (error) {
         return error;
     }
     
-    return user.user_id;
+    return user;
 }
 
 async function findUserByEmail(email: string) {
@@ -33,6 +32,6 @@ async function findUserByEmail(email: string) {
         return undefined;
     }
     
-    return user[0].user_id;
+    return user[0];
 }
 export { createUser, findUserByEmail };

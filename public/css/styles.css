@@ -25,6 +25,7 @@ body {
     border: 2px solid rgb(99, 33, 99);
     border-radius: 9px;
     font-size: 1.1rem;
+    resize: none;
 }
 
 #credentials-input input[type=button]{
@@ -54,6 +55,7 @@ body {
     border: 2px solid rgb(99, 33, 99);
     border-radius: 9px;
     font-size: 1.1rem;
+    resize: none;
 }
 
 #message-inputs input[type=button]{
