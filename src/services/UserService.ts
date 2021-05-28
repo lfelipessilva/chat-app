@@ -14,13 +14,12 @@ async function createUser(email: string) {
             .insert({ 
                 user_id: user.user_id, 
                 user_email: user.user_email, 
-                user_name: null,
                 created_at: user.created_at
             });
     } catch (error) {
         return error;
     }
-    
+
     return user;
 }
 

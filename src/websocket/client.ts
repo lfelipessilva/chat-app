@@ -6,13 +6,13 @@ import { createMessage, findMessagesByUserId } from '../services/MessageService'
 io.on('connect', (socket) => {
     socket.on('client_first_message', async (params) => {
         const socket_id = socket.id;
-        console.log(params);
+        
         const { text, email } = params;
 
         //a conexão se cria para verificar se o usuario ja está sendo atendido, ela tem o id da conexão do usuario e, se não estiver 
         //sendo atendido o admin_id é igual a null, isto serve para que todos sejam mostrados corretamente na tela do admin.
         const userExists = await findUserByEmail(email);
-
+        
         let userId = null;
         if(!userExists) {
             //se usuario não existe ele cria o usuario e uma conexão para ele
