@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CallsGateway = void 0;
 const websockets_1 = require("@nestjs/websockets");
+const net_1 = require("net");
 const calls_service_1 = require("./calls.service");
 const create_call_dto_1 = require("./dto/create-call.dto");
 const update_call_dto_1 = require("./dto/update-call.dto");
@@ -21,8 +22,8 @@ let CallsGateway = class CallsGateway {
     constructor(callsService) {
         this.callsService = callsService;
     }
-    create(createCallDto) {
-        return this.callsService.create(createCallDto);
+    create(client, createCallDto) {
+        return this.callsService.create(client, createCallDto);
     }
     findAll() {
         return this.callsService.findAll();
@@ -39,9 +40,8 @@ let CallsGateway = class CallsGateway {
 };
 __decorate([
     (0, websockets_1.SubscribeMessage)('createCall'),
-    __param(0, (0, websockets_1.MessageBody)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_call_dto_1.CreateCallDto]),
+    __metadata("design:paramtypes", [net_1.Socket, create_call_dto_1.CreateCallDto]),
     __metadata("design:returntype", void 0)
 ], CallsGateway.prototype, "create", null);
 __decorate([
@@ -54,7 +54,7 @@ __decorate([
     (0, websockets_1.SubscribeMessage)('findOneCall'),
     __param(0, (0, websockets_1.MessageBody)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], CallsGateway.prototype, "findOne", null);
 __decorate([
@@ -68,7 +68,7 @@ __decorate([
     (0, websockets_1.SubscribeMessage)('removeCall'),
     __param(0, (0, websockets_1.MessageBody)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], CallsGateway.prototype, "remove", null);
 CallsGateway = __decorate([

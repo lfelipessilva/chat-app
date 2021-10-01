@@ -9,36 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CallsService = void 0;
+exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma.service");
 const uuid_1 = require("uuid");
-let CallsService = class CallsService {
+let UsersService = class UsersService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    create(client, createCallDto) {
-        createCallDto.id = (0, uuid_1.v4)();
-        createCallDto.clientId = client.id;
-        return this.prisma.call.create({ data: createCallDto });
+    async create(createUserDto) {
+        console.log(createUserDto);
+        createUserDto.id = (0, uuid_1.v4)();
+        return await this.prisma.user.create({ data: createUserDto });
     }
     findAll() {
-        return `This action returns all calls`;
+        return `This action returns all users`;
     }
     findOne(id) {
-        return `This action returns a #${id} call`;
+        return `This action returns a #${id} user`;
     }
-    update(id, updateCallDto) {
-        console.log(updateCallDto);
-        return `This action updates a #${id} call`;
+    update(id, updateUserDto) {
+        return `This action updates a #${id} user`;
     }
     remove(id) {
-        return `This action removes a #${id} call`;
+        return `This action removes a #${id} user`;
     }
 };
-CallsService = __decorate([
+UsersService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], CallsService);
-exports.CallsService = CallsService;
-//# sourceMappingURL=calls.service.js.map
+], UsersService);
+exports.UsersService = UsersService;
+//# sourceMappingURL=users.service.js.map

@@ -10,29 +10,30 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Atendant {
-  id            String   @id
-  email         String   @unique
-  answeredCalls Call[]
-  created_at    DateTime @default(now())
-  updated_at    DateTime @default(now())
-}
-
-model Call {
-  id             String    @id
-  atendant       Atendant  @relation(fields: [atendantId], references: [id])
-  atendantId     String
-  clientSocketId String
-  created_at     DateTime  @default(now())
-  updated_at     DateTime  @default(now())
-  Message        Message[]
+model User {
+  id         String   @id
+  name       String
+  email      String   @unique
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 model Message {
-  id         String   @id
-  isAtendant Boolean  @default(false)
-  call       Call     @relation(fields: [callId], references: [id])
-  callId     String
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  id           String     @id
+  sender       String
+  text         String
+  connection   Connection @relation(fields: [connectionId], references: [id])
+  connectionId String
+  created_at   DateTime   @default(now())
+  updated_at   DateTime   @default(now())
+}
+
+model Connection {
+  id            String    @id
+  first_userId  String
+  second_userId String
+  messages      Message[]
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @default(now())
 }
