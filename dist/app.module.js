@@ -13,11 +13,12 @@ const app_service_1 = require("./app.service");
 const prisma_module_1 = require("./prisma.module");
 const users_module_1 = require("./users/users.module");
 const connections_module_1 = require("./connections/connections.module");
+const messages_module_1 = require("./messages/messages.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, connections_module_1.ConnectionsModule],
+        imports: [prisma_module_1.PrismaModule, users_module_1.UsersModule, connections_module_1.ConnectionsModule, messages_module_1.MessagesModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

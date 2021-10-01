@@ -6,17 +6,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConnectionsModule = void 0;
+exports.MessagesService = void 0;
 const common_1 = require("@nestjs/common");
-const connections_service_1 = require("./connections.service");
-const connections_controller_1 = require("./connections.controller");
-let ConnectionsModule = class ConnectionsModule {
+let MessagesService = class MessagesService {
+    create(createMessageDto) {
+        return 'This action adds a new message';
+    }
+    findAll() {
+        return `This action returns all messages`;
+    }
+    findOne(id) {
+        return `This action returns a #${id} message`;
+    }
+    update(id, updateMessageDto) {
+        return `This action updates a #${id} message`;
+    }
+    remove(id) {
+        return `This action removes a #${id} message`;
+    }
 };
-ConnectionsModule = __decorate([
-    (0, common_1.Module)({
-        controllers: [connections_controller_1.ConnectionsController],
-        providers: [connections_service_1.ConnectionsService],
-    })
-], ConnectionsModule);
-exports.ConnectionsModule = ConnectionsModule;
-//# sourceMappingURL=connections.module.js.map
+MessagesService = __decorate([
+    (0, common_1.Injectable)()
+], MessagesService);
+exports.MessagesService = MessagesService;
+//# sourceMappingURL=messages.service.js.map

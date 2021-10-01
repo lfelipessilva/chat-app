@@ -1,9 +1,12 @@
 import { CreateConnectionDto } from './dto/create-connection.dto';
 import { UpdateConnectionDto } from './dto/update-connection.dto';
+import { PrismaService } from 'src/prisma.service';
 export declare class ConnectionsService {
-    create(createConnectionDto: CreateConnectionDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateConnectionDto: UpdateConnectionDto): string;
-    remove(id: number): string;
+    private prisma;
+    constructor(prisma: PrismaService);
+    create(createConnectionDto: CreateConnectionDto): Promise<import(".prisma/client").Connection>;
+    findAll(): Promise<import(".prisma/client").Connection[]>;
+    findOne(id: string): Promise<import(".prisma/client").Connection>;
+    update(id: string, updateConnectionDto: UpdateConnectionDto): Promise<import(".prisma/client").Connection>;
+    remove(id: string): Promise<import(".prisma/client").Connection>;
 }

@@ -28,13 +28,13 @@ let ConnectionsController = class ConnectionsController {
         return this.connectionsService.findAll();
     }
     findOne(id) {
-        return this.connectionsService.findOne(+id);
+        return this.connectionsService.findOne(id);
     }
     update(id, updateConnectionDto) {
-        return this.connectionsService.update(+id, updateConnectionDto);
+        return this.connectionsService.update(id, updateConnectionDto);
     }
     remove(id) {
-        return this.connectionsService.remove(+id);
+        return this.connectionsService.remove(id);
     }
 };
 __decorate([
