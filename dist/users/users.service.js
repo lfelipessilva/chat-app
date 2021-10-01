@@ -22,17 +22,30 @@ let UsersService = class UsersService {
         createUserDto.id = (0, uuid_1.v4)();
         return await this.prisma.user.create({ data: createUserDto });
     }
-    findAll() {
-        return `This action returns all users`;
+    async findAll() {
+        return await this.prisma.user.findMany();
     }
-    findOne(id) {
-        return `This action returns a #${id} user`;
+    async findOne(id) {
+        return await this.prisma.user.findUnique({
+            where: {
+                id: id,
+            },
+        });
     }
-    update(id, updateUserDto) {
-        return `This action updates a #${id} user`;
+    async update(id, updateUserDto) {
+        return await this.prisma.user.update({
+            where: {
+                id: id,
+            },
+            data: updateUserDto,
+        });
     }
-    remove(id) {
-        return `This action removes a #${id} user`;
+    async remove(id) {
+        return await this.prisma.user.delete({
+            where: {
+                id: id,
+            },
+        });
     }
 };
 UsersService = __decorate([
