@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
-export class Authenticate implements NestMiddleware {
+export class AuthMiddleware implements NestMiddleware {
   constructor(private jwtService: JwtService) {}
 
   use(req: Request, res: Response, next: NextFunction) {

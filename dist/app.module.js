@@ -15,7 +15,11 @@ const users_module_1 = require("./users/users.module");
 const connections_module_1 = require("./connections/connections.module");
 const messages_module_1 = require("./messages/messages.module");
 const auth_module_1 = require("./auth/auth.module");
+const auth_middleware_1 = require("./auth/auth.middleware");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer.apply(auth_middleware_1.AuthMiddleware).forRoutes('users');
+    }
 };
 AppModule = __decorate([
     (0, common_1.Module)({

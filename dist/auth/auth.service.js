@@ -28,22 +28,10 @@ let AuthService = class AuthService {
         }
         const payload = { id: user.id };
         user.password = undefined;
-        const headerToken = req.headers.authorization;
-        if (!headerToken) {
-            return res.status(401).send({ error: 'No token provided' });
-        }
-        const [scheme, token] = headerToken.split(' ');
-        if (!token) {
-            return res.status(401).send({ error: 'Token error' });
-        }
-        try {
-            const user = jwt.verify(token);
-            req.user = user.id;
-            return next();
-        }
-        catch (error) {
-            return res.status(401).send({ error: 'Invalid token' });
-        }
+        return {
+            user,
+            token: this.jwtService.sign(payload),
+        };
     }
 };
 AuthService = __decorate([
