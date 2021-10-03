@@ -9,25 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthService = void 0;
+exports.Authenticate = void 0;
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("../users/users.service");
 const jwt_1 = require("@nestjs/jwt");
-let AuthService = class AuthService {
-    constructor(usersService, jwtService) {
-        this.usersService = usersService;
+let Authenticate = class Authenticate {
+    constructor(jwtService) {
         this.jwtService = jwtService;
     }
-    async authenticate(data) {
-        const user = await this.usersService.findByEmail(data.email);
-        if (!user) {
-            throw new common_1.UnauthorizedException();
-        }
-        if (data.password != user.password) {
-            throw new common_1.UnauthorizedException();
-        }
-        const payload = { id: user.id };
-        user.password = undefined;
+    use(req, res, next) {
         const headerToken = req.headers.authorization;
         if (!headerToken) {
             return res.status(401).send({ error: 'No token provided' });
@@ -37,7 +26,7 @@ let AuthService = class AuthService {
             return res.status(401).send({ error: 'Token error' });
         }
         try {
-            const user = jwt.verify(token);
+            const user = this.jwtService.verify(token);
             req.user = user.id;
             return next();
         }
@@ -46,10 +35,9 @@ let AuthService = class AuthService {
         }
     }
 };
-AuthService = __decorate([
+Authenticate = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_service_1.UsersService,
-        jwt_1.JwtService])
-], AuthService);
-exports.AuthService = AuthService;
-//# sourceMappingURL=auth.service.js.map
+    __metadata("design:paramtypes", [jwt_1.JwtService])
+], Authenticate);
+exports.Authenticate = Authenticate;
+//# sourceMappingURL=auth.middleware.js.map

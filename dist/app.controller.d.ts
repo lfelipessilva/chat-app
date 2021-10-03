@@ -5,8 +5,5 @@ export declare class AppController {
     private authService;
     constructor(appService: AppService, authService: AuthService);
     getHello(): string;
-    login(data: any): Promise<{
-        user: import(".prisma/client").User;
-        token: string;
-    }>;
+    login(data: any): Promise<any>;
 }
