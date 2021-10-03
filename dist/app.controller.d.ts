@@ -1,6 +1,12 @@
 import { AppService } from './app.service';
+import { AuthService } from './auth/auth.service';
 export declare class AppController {
     private readonly appService;
-    constructor(appService: AppService);
+    private authService;
+    constructor(appService: AppService, authService: AuthService);
     getHello(): string;
+    login(data: any): Promise<{
+        user: import(".prisma/client").User;
+        token: string;
+    }>;
 }

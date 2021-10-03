@@ -32,6 +32,13 @@ let UsersService = class UsersService {
             },
         });
     }
+    async findByEmail(email) {
+        return await this.prisma.user.findUnique({
+            where: {
+                email: email,
+            },
+        });
+    }
     async update(id, updateUserDto) {
         return await this.prisma.user.update({
             where: {

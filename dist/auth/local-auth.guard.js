@@ -6,18 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersModule = void 0;
+exports.LocalAuthGuard = void 0;
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("./users.service");
-const users_controller_1 = require("./users.controller");
-let UsersModule = class UsersModule {
+const passport_1 = require("@nestjs/passport");
+let LocalAuthGuard = class LocalAuthGuard extends (0, passport_1.AuthGuard)('local') {
 };
-UsersModule = __decorate([
-    (0, common_1.Module)({
-        controllers: [users_controller_1.UsersController],
-        providers: [users_service_1.UsersService],
-        exports: [users_service_1.UsersService],
-    })
-], UsersModule);
-exports.UsersModule = UsersModule;
-//# sourceMappingURL=users.module.js.map
+LocalAuthGuard = __decorate([
+    (0, common_1.Injectable)()
+], LocalAuthGuard);
+exports.LocalAuthGuard = LocalAuthGuard;
+//# sourceMappingURL=local-auth.guard.js.map
