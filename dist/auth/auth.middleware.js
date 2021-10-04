@@ -13,8 +13,8 @@ exports.AuthMiddleware = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 let AuthMiddleware = class AuthMiddleware {
-    constructor(jwtService) {
-        this.jwtService = jwtService;
+    constructor(jwt) {
+        this.jwt = jwt;
     }
     use(req, res, next) {
         const headerToken = req.headers.authorization;
@@ -26,7 +26,7 @@ let AuthMiddleware = class AuthMiddleware {
             return res.status(401).send({ error: 'Token error' });
         }
         try {
-            const user = this.jwtService.verify(token);
+            const user = this.jwt.verify(token);
             req.user = user.id;
             return next();
         }
