@@ -1,17 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { CreateConnectionDto } from './dto/create-connection.dto';
 import { UpdateConnectionDto } from './dto/update-connection.dto';
 import { PrismaService } from 'src/prisma.service';
-import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class ConnectionsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createConnectionDto: CreateConnectionDto) {
-    createConnectionDto.id = uuid();
-    //return await this.prisma.connection.create({ data: createConnectionDto });
-    return 'worked';
+  async create(createConnectionData: CreateConnectionDto) {
+    try {
+      const secondUser = await this.findOne(createConnectionData.second_userId);
+
+      if (secondUser !== null) {
+        throw new NotFoundException();
+      }
+
+      return await this.prisma.connection.create({
+        data: createConnectionData,
+      });
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
   }
 
   async findAll() {

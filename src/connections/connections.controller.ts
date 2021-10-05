@@ -13,14 +13,20 @@ import { ConnectionsService } from './connections.service';
 import { CreateConnectionDto } from './dto/create-connection.dto';
 import { UpdateConnectionDto } from './dto/update-connection.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { v4 as uuid } from 'uuid';
 @Controller('connections')
 export class ConnectionsController {
   constructor(private readonly connectionsService: ConnectionsService) {}
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createConnectionDto: CreateConnectionDto, @Request() req) {
-    console.log(req.user);
+  async create(
+    @Body() createConnectionData: CreateConnectionDto,
+    @Request() req,
+  ) {
+    createConnectionData.id = uuid();
+    createConnectionData.first_userId = req.user.id;
+    return await this.connectionsService.create(createConnectionData);
   }
 
   @Get()

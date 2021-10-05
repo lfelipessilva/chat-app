@@ -12,14 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConnectionsService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma.service");
-const uuid_1 = require("uuid");
 let ConnectionsService = class ConnectionsService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async create(createConnectionDto) {
-        createConnectionDto.id = (0, uuid_1.v4)();
-        return 'worked';
+    async create(createConnectionData) {
+        try {
+            const secondUser = await this.findOne(createConnectionData.second_userId);
+            if (secondUser !== null) {
+                throw new common_1.NotFoundException();
+            }
+            return await this.prisma.connection.create({
+                data: createConnectionData,
+            });
+        }
+        catch (error) {
+            throw new common_1.BadRequestException(error);
+        }
     }
     async findAll() {
         return await this.prisma.connection.findMany();

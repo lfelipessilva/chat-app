@@ -4,7 +4,7 @@ import { PrismaService } from 'src/prisma.service';
 export declare class ConnectionsService {
     private prisma;
     constructor(prisma: PrismaService);
-    create(createConnectionDto: CreateConnectionDto): Promise<string>;
+    create(createConnectionData: CreateConnectionDto): Promise<import(".prisma/client").Connection>;
     findAll(): Promise<import(".prisma/client").Connection[]>;
     findOne(id: string): Promise<import(".prisma/client").Connection>;
     update(id: string, updateConnectionDto: UpdateConnectionDto): Promise<import(".prisma/client").Connection>;

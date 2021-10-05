@@ -18,12 +18,15 @@ const connections_service_1 = require("./connections.service");
 const create_connection_dto_1 = require("./dto/create-connection.dto");
 const update_connection_dto_1 = require("./dto/update-connection.dto");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const uuid_1 = require("uuid");
 let ConnectionsController = class ConnectionsController {
     constructor(connectionsService) {
         this.connectionsService = connectionsService;
     }
-    create(createConnectionDto, req) {
-        console.log(req.user);
+    async create(createConnectionData, req) {
+        createConnectionData.id = (0, uuid_1.v4)();
+        createConnectionData.first_userId = req.user.id;
+        return await this.connectionsService.create(createConnectionData);
     }
     findAll() {
         return this.connectionsService.findAll();
@@ -45,7 +48,7 @@ __decorate([
     __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_connection_dto_1.CreateConnectionDto, Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ConnectionsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
