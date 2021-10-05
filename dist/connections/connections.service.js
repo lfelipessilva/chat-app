@@ -19,7 +19,7 @@ let ConnectionsService = class ConnectionsService {
     }
     async create(createConnectionDto) {
         createConnectionDto.id = (0, uuid_1.v4)();
-        return await this.prisma.connection.create({ data: createConnectionDto });
+        return 'worked';
     }
     async findAll() {
         return await this.prisma.connection.findMany();

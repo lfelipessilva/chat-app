@@ -19,7 +19,7 @@ let MessagesService = class MessagesService {
         return `This action returns a #${id} message`;
     }
     update(id, updateMessageDto) {
-        return `This action updates a #${id} message`;
+        return updateMessageDto;
     }
     remove(id) {
         return `This action removes a #${id} message`;

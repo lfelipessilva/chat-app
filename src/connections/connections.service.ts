@@ -10,7 +10,8 @@ export class ConnectionsService {
 
   async create(createConnectionDto: CreateConnectionDto) {
     createConnectionDto.id = uuid();
-    return await this.prisma.connection.create({ data: createConnectionDto });
+    //return await this.prisma.connection.create({ data: createConnectionDto });
+    return 'worked';
   }
 
   async findAll() {

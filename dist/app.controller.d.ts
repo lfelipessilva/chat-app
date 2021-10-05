@@ -5,9 +5,4 @@ export declare class AppController {
     private authService;
     constructor(appService: AppService, authService: AuthService);
     getHello(): string;
-    login(req: any): Promise<{
-        user: any;
-        token: string;
-    }>;
-    getProfile(req: any): any;
 }

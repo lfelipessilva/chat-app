@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { ConnectionsModule } from './connections/connections.module';
 import { MessagesModule } from './messages/messages.module';
 import { AuthModule } from './auth/auth.module';
+
 @Module({
   imports: [
     PrismaModule,

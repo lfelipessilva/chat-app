@@ -8,6 +8,6 @@ export declare class MessagesGateway {
     create(createMessageDto: CreateMessageDto, client: Socket): Promise<CreateMessageDto>;
     findAll(): string;
     findOne(id: string): string;
-    update(updateMessageDto: UpdateMessageDto): string;
+    update(updateMessageDto: UpdateMessageDto): UpdateMessageDto;
     remove(id: string): string;
 }

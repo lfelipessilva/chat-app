@@ -17,12 +17,13 @@ const common_1 = require("@nestjs/common");
 const connections_service_1 = require("./connections.service");
 const create_connection_dto_1 = require("./dto/create-connection.dto");
 const update_connection_dto_1 = require("./dto/update-connection.dto");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 let ConnectionsController = class ConnectionsController {
     constructor(connectionsService) {
         this.connectionsService = connectionsService;
     }
-    create(createConnectionDto) {
-        return this.connectionsService.create(createConnectionDto);
+    create(createConnectionDto, req) {
+        return req.user;
     }
     findAll() {
         return this.connectionsService.findAll();
@@ -38,10 +39,12 @@ let ConnectionsController = class ConnectionsController {
     }
 };
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_connection_dto_1.CreateConnectionDto]),
+    __metadata("design:paramtypes", [create_connection_dto_1.CreateConnectionDto, Object]),
     __metadata("design:returntype", void 0)
 ], ConnectionsController.prototype, "create", null);
 __decorate([

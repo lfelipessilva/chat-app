@@ -17,7 +17,7 @@ export class MessagesService {
   }
 
   update(id: string, updateMessageDto: UpdateMessageDto) {
-    return `This action updates a #${id} message`;
+    return updateMessageDto;
   }
 
   remove(id: string) {

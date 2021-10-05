@@ -4,6 +4,6 @@ export declare class MessagesService {
     create(createMessageDto: CreateMessageDto): CreateMessageDto;
     findAll(): string;
     findOne(id: string): string;
-    update(id: string, updateMessageDto: UpdateMessageDto): string;
+    update(id: string, updateMessageDto: UpdateMessageDto): UpdateMessageDto;
     remove(id: string): string;
 }
