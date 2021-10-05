@@ -2,7 +2,9 @@ import {
   WebSocketGateway,
   SubscribeMessage,
   MessageBody,
+  ConnectedSocket,
 } from '@nestjs/websockets';
+import { Socket } from 'socket.io';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
@@ -12,7 +14,11 @@ export class MessagesGateway {
   constructor(private readonly messagesService: MessagesService) {}
 
   @SubscribeMessage('createMessage')
-  create(@MessageBody() createMessageDto: CreateMessageDto) {
+  async create(
+    @MessageBody() createMessageDto: CreateMessageDto,
+    @ConnectedSocket() client: Socket,
+  ) {
+    client.emit('sendMessage', 'test');
     return this.messagesService.create(createMessageDto);
   }
 

@@ -10,7 +10,7 @@ exports.MessagesService = void 0;
 const common_1 = require("@nestjs/common");
 let MessagesService = class MessagesService {
     create(createMessageDto) {
-        return 'This action adds a new message';
+        return createMessageDto;
     }
     findAll() {
         return `This action returns all messages`;

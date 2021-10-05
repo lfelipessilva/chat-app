@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MessagesGateway = void 0;
 const websockets_1 = require("@nestjs/websockets");
+const socket_io_1 = require("socket.io");
 const messages_service_1 = require("./messages.service");
 const create_message_dto_1 = require("./dto/create-message.dto");
 const update_message_dto_1 = require("./dto/update-message.dto");
@@ -21,7 +22,8 @@ let MessagesGateway = class MessagesGateway {
     constructor(messagesService) {
         this.messagesService = messagesService;
     }
-    create(createMessageDto) {
+    async create(createMessageDto, client) {
+        client.emit('sendMessage', 'test');
         return this.messagesService.create(createMessageDto);
     }
     findAll() {
@@ -40,9 +42,11 @@ let MessagesGateway = class MessagesGateway {
 __decorate([
     (0, websockets_1.SubscribeMessage)('createMessage'),
     __param(0, (0, websockets_1.MessageBody)()),
+    __param(1, (0, websockets_1.ConnectedSocket)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_message_dto_1.CreateMessageDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [create_message_dto_1.CreateMessageDto,
+        socket_io_1.Socket]),
+    __metadata("design:returntype", Promise)
 ], MessagesGateway.prototype, "create", null);
 __decorate([
     (0, websockets_1.SubscribeMessage)('findAllMessages'),
