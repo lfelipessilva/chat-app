@@ -23,7 +23,7 @@ let ConnectionsController = class ConnectionsController {
         this.connectionsService = connectionsService;
     }
     create(createConnectionDto, req) {
-        return req.user;
+        console.log(req.user);
     }
     findAll() {
         return this.connectionsService.findAll();

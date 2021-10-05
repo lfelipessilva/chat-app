@@ -50,7 +50,7 @@ export class UsersController {
   }
 
   @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
+  @Post('/login')
   async login(@Request() req) {
     return this.authService.login(req.user);
   }

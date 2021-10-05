@@ -20,7 +20,7 @@ export class ConnectionsController {
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createConnectionDto: CreateConnectionDto, @Request() req) {
-    return req.user;
+    console.log(req.user);
   }
 
   @Get()

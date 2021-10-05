@@ -4,7 +4,7 @@ import { UpdateConnectionDto } from './dto/update-connection.dto';
 export declare class ConnectionsController {
     private readonly connectionsService;
     constructor(connectionsService: ConnectionsService);
-    create(createConnectionDto: CreateConnectionDto, req: any): any;
+    create(createConnectionDto: CreateConnectionDto, req: any): void;
     findAll(): Promise<import(".prisma/client").Connection[]>;
     findOne(id: string): Promise<import(".prisma/client").Connection>;
     update(id: string, updateConnectionDto: UpdateConnectionDto): Promise<import(".prisma/client").Connection>;
